@@ -8,6 +8,7 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  encrypted_password :string(255)
+#  salt               :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -33,6 +34,7 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
+  #Class methods - does not operate on the object (instance of the class) but rather the class itself
   class << self
     def authenticate(email, submitted_password)
       user = find_by_email(email)
