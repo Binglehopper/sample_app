@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #cff;
+  background: #cff;  
+/*	background-image:url('back.png'); */
 }
 
 header {
