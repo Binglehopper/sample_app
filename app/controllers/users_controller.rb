@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   
   #For the sign up page  
   def new
+    @user = User.new #create a raw user object
     @title = "Sign up"
   end
 
