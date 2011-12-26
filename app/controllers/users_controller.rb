@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 
-  #For the profile page
+  #For the profile page - SHOW action
   def show
     @user = User.find(params[:id])
     @title = @user.name
   end
   
-  #For the sign up page  
+  #For the sign up page - NEW action
   def new
     @user = User.new #create a raw user object
     @title = "Sign up"
@@ -24,4 +24,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+    @title = "Edit user"
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      # it worked
+      redirect_to @user, :flash => {:success => "Profile updated."}
+    else
+      @title = "Edit user"
+      render 'edit'
+    end
+  end
+  
 end
