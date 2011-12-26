@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :authenticate, :only => [:index, :edit, :update]
   before_filter :correct_user, :only => [:edit, :update]
+
+  def index
+    @users = User.all
+    @title = "All users"
+  end
 
   #For the profile page - SHOW action
   def show
@@ -15,7 +20,7 @@ class UsersController < ApplicationController
     @title = "Sign up"
   end
 
-  #This is the action that happens when you POST to /users.  Comes from the user:resources in the model
+  #This is the action that happens when you POST to /users - CREATE action 
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -27,11 +32,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
+  #For the edit page - EDIT action
+  def edit 
     @user = User.find(params[:id])
     @title = "Edit user"
   end
   
+  #For the updating of profiles - UPDATE action
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
