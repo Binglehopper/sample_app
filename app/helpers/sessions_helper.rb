@@ -17,6 +17,11 @@ module SessionsHelper
     !current_user.nil? # current user will be nil if nobody is signed in
   end
   
+  def sign_out
+    cookies.delete(:remember_token) # Delete cookie
+    self.current_user = nil # Set user to nil
+  end
+  
   private
 
   def user_from_remember_token
