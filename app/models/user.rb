@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+  
   #Class methods - does not operate on the object (instance of the class) but rather the class itself
   class << self
     def authenticate(email, submitted_password)
